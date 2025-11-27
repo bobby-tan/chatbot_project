@@ -71,3 +71,13 @@ export default defineConfig([
   },
 ])
 ```
+
+## running this on runpod
+1. pull repo `git clone https://github.com/bobby-tan/chatbot_project`
+2. navigate to directory `cd chatbot-frontend/`
+3. install node `curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -`
+4. install node `sudo apt install -y nodejs`
+5. run host command `npm run dev -- --host 0.0.0.0 --port 5173`
+
+Remember to expose 5173 as a http port on runpod
+Navigate to link https://<pod-id>-5173.proxy.runpod.net/
