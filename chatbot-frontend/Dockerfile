@@ -1,3 +1,6 @@
+# docker buildx build --platform linux/amd64,linux/arm64 -t tanliangwei/chatbot-frontend:latest . 
+# docker run tanliangwei/chatbot-frontend
+# docker push tanliangwei/chatbot-frontend:latest
 # 1. Base image
 FROM --platform=linux/amd64 node:20-slim
 
