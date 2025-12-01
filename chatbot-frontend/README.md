@@ -82,3 +82,5 @@ export default defineConfig([
 
 Remember to expose 5173 as a http port on runpod
 Navigate to link https://<pod-id>-5173.proxy.runpod.net/
+
+This was ran tested on Runpod Ubuntu 20.04
