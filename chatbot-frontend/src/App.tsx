@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
+
+type Message = {
+    type: string, text: string
+};
 
 function App() {
     const [userInput, setUserInput] = useState('');
-    const [chatLog, setChatLog] = useState([]);
+    const [chatLog, setChatLog] = useState<Message[]>([]);
     const [loading, setLoading] = useState(false);
 
     // Effect to load chat history from local storage when the app starts
@@ -14,12 +18,12 @@ function App() {
         }
     }, []);
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
         if (!userInput.trim()) return; // Don't send empty messages
 
-        const userMessage = { type: 'user', text: userInput };
-        const newChatLog = [...chatLog, userMessage];
+        const userMessage: Message = { type: 'user', text: userInput };
+        const newChatLog: Message[] = [...chatLog, userMessage];
         setChatLog(newChatLog);
         setUserInput('');
         setLoading(true);
