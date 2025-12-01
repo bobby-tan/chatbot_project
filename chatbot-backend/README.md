@@ -12,4 +12,5 @@ When pip install new packages, remember to do `pip freeze > requirements.txt`. t
 
 1. git clone https://github.com/bobby-tan/chatbot_project
 2. cd chatbot_project/chatbot-backend/
-3. 
+3. pip install -r requirements.txt
+4. uvicorn main:app --host 0.0.0.0 --port 8000
