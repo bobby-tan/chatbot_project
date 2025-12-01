@@ -15,14 +15,14 @@ app = FastAPI()
 # --- 2. Configure CORS ---
 # This is crucial for allowing your React frontend to communicate with this backend.
 # It's a security feature that browsers enforce.
-origins = [
-    "http://localhost:5173",  # Default Vite React dev server
-    "http://localhost:3000",  # Common Create React App dev server
-]
+# origins = [
+#     "http://localhost:5173",  # Default Vite React dev server
+#     "http://localhost:3000",  # Common Create React App dev server
+# ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origin_regex=r"(https://.*\.proxy\.runpod\.net)|(http://localhost:(3000|5173))",
     allow_credentials=True,
     allow_methods=["*"], # Allow all methods (GET, POST, etc.)
     allow_headers=["*"], # Allow all headers
