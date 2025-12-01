@@ -1,8 +1,11 @@
 # docker buildx build --platform linux/amd64,linux/arm64 -t tanliangwei/chatbot-frontend:latest . 
-# docker run tanliangwei/chatbot-frontend
+# docker run --rm -p 5173:5173 tanliangwei/chatbot-frontend:latest
 # docker push tanliangwei/chatbot-frontend:latest
+# docker run --rm -e CHATBOT_BACKEND_URL=http://localhost:8000  -p 5173:5173 tanliangwei/chatbot-frontend:latest
+# interactive run docker run --rm -it tanliangwei/chatbot-frontend:latest sh
 # 1. Base image
-FROM --platform=linux/amd64 node:20-slim
+# Base image
+FROM node:20-slim
 
 # 2. Install git and serve
 RUN apt-get update && \
@@ -10,23 +13,25 @@ RUN apt-get update && \
     npm install -g serve && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# 3. Set working directory
+# Set working directory
 WORKDIR /app
 
-# 4. Copy your frontend code from local machine (not cloning at runtime)
+# Copy your frontend code from local machine (not cloning at runtime)
 COPY . ./chatbot-frontend/
 
 # 5. Go into frontend folder
 WORKDIR /app/chatbot-frontend
 
-# 6. Install dependencies
+# Install dependencies
 RUN npm install
 
-# 7. Build frontend
-RUN npm run build
+# Add entrypoint
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-# 8. Expose port
+ENTRYPOINT ["/entrypoint.sh"]
+
+# Expose port
 EXPOSE 5173
 
-# 9. Serve production build
-CMD ["serve", "-s", "dist", "-l", "5173"]
+# CMD ["serve", "-s", "dist", "-l", "5173"]

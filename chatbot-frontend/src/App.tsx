@@ -29,8 +29,11 @@ function App() {
         setLoading(true);
 
         try {
+            const res = await fetch("/config.json");
+            const config = await res.json();
+            const backendUrl = config.CHATBOT_BACKEND_URL;
             // The API call to our FastAPI backend
-            const response = await fetch('http://localhost:8000/chat', {
+            const response = await fetch(backendUrl + '/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ user_message: userInput }),
