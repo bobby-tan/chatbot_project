@@ -20,13 +20,13 @@ app = FastAPI()
 #     "http://localhost:3000",  # Common Create React App dev server
 # ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"], # Allow all methods (GET, POST, etc.)
-    allow_headers=["*"], # Allow all headers
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],
+#     allow_credentials=True,
+#     allow_methods=["*"], # Allow all methods (GET, POST, etc.)
+#     allow_headers=["*"], # Allow all headers
+# )
 
 # --- 3. Define the Request Data Structure ---
 # Pydantic model ensures the incoming data has the correct format.
