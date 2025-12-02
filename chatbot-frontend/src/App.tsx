@@ -32,10 +32,14 @@ function App() {
             const res = await fetch("/config.json");
             const config = await res.json();
             const backendUrl = config.CHATBOT_BACKEND_URL;
+            const token = config.BEARER_TOKEN;
             // The API call to our FastAPI backend
             const response = await fetch(backendUrl + '/chat', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify({ user_message: userInput }),
             });
 
