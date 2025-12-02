@@ -84,3 +84,14 @@ Remember to expose 5173 as a http port on runpod
 Navigate to link https://<pod-id>-5173.proxy.runpod.net/
 
 This was ran tested on Runpod Ubuntu 20.04
+
+## Rolling out instructions
+1. Update code and build docker image: `docker buildx build --platform linux/amd64,linux/arm64 -t tanliangwei/chatbot-backend:v3 .` Remember to update version number
+2. Push to docker hub: `docker push tanliangwei/chatbot-backend:v2` Remember to use updated version number
+3. Set # of active workers to 1 to ensure that there is 1 worker still handling request 
+4. Deploy new version by clicking "manage". Then, "new release". 
+5. Wait for all the workers, except the active 1 to update to new version. 
+6. Set # of active workers to 1 to force one of the workers running new release to become an active worker
+7. Wait a few minutes for the other active worker to warm up. I'm not sure how much this helps
+8. Kill the outdated worker 
+9. Set # of active worker back to 1 if want to save cost. 

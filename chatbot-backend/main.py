@@ -22,7 +22,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=r"(https://.*\.proxy\.runpod\.net)|(http://localhost:(3000|5173))",
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"], # Allow all methods (GET, POST, etc.)
     allow_headers=["*"], # Allow all headers
@@ -34,7 +34,7 @@ class ChatInput(BaseModel):
     user_message: str
 
 # --- 4. Create API Endpoints ---
-@app.get("/")
+@app.get("/ping")
 async def health_check():
     """A simple endpoint to confirm the server is running."""
     return {"status": "health check API"}
